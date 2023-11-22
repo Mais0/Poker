@@ -63,21 +63,22 @@ int main() {
 		fourthPlayer.setID(player3);
 		fifthPlayer.setID(player4);
 		//Выдача двух начальных карт, определение какие карты выдадутся начальными
-			string first, second;
-			int withoutDeck[SIZE];
-			int counterDeck = 0;
-			//Функция принимает массив с картами, и две переменные с начальными картами, после генерирует...
-			//...случайный индекс массива и выдаёт карту
-			generateStartingCards(deck, first, second, withoutDeck, counterDeck);
-			//Устанавливает игроку выпавшие ему карты
-			firstPlayer.setStartingCards(first, second);
-			generateStartingCards(deck, first, second, withoutDeck, counterDeck);
-			secondPlayer.setStartingCards(first, second);
-			generateStartingCards(deck, first, second, withoutDeck, counterDeck);
-			thirdPlayer.setStartingCards(first, second);
-			generateStartingCards(deck, first, second, withoutDeck, counterDeck);
-			fourthPlayer.setStartingCards(first, second);
-			generateStartingCards(deck, first, second, withoutDeck, counterDeck);
-			fifthPlayer.setStartingCards(first, second);
+		string first, second;
+		int withoutDeck[SIZE];
+		int counterDeck = 0;
+		//Функция принимает массив с картами, и две переменные с начальными картами, после генерирует...
+		//...случайный индекс массива и выдаёт карту
+		generateStartingCards(deck, first, second, withoutDeck, counterDeck);
+		//Устанавливает игроку выпавшие ему карты
+		cout << "penis" << " " << second << endl;
+		firstPlayer.setStartingCards(first, second);
+		generateStartingCards(deck, first, second, withoutDeck, counterDeck);
+		secondPlayer.setStartingCards(first, second);
+		generateStartingCards(deck, first, second, withoutDeck, counterDeck);
+		thirdPlayer.setStartingCards(first, second);
+		generateStartingCards(deck, first, second, withoutDeck, counterDeck);
+		fourthPlayer.setStartingCards(first, second);
+		generateStartingCards(deck, first, second, withoutDeck, counterDeck);
+		fifthPlayer.setStartingCards(first, second);
 	}
 }

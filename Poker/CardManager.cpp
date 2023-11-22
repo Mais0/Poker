@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <ctime>
 
+void algorithm(int count);
+
 void generateStartingCards(string deck[], string first, string second, int withoutDeck[], int counterDeck) {
 	srand(unsigned(time(0)));
 	//Генерирует карту после чего добавляет её индекс в массив с вышедшеми картами...
