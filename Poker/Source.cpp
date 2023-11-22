@@ -70,7 +70,6 @@ int main() {
 		//...случайный индекс массива и выдаёт карту
 		generateStartingCards(deck, first, second, withoutDeck, counterDeck);
 		//Устанавливает игроку выпавшие ему карты
-		cout << "penis" << " " << second << endl;
 		firstPlayer.setStartingCards(first, second);
 		generateStartingCards(deck, first, second, withoutDeck, counterDeck);
 		secondPlayer.setStartingCards(first, second);
