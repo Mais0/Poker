@@ -6,9 +6,9 @@ void setDeck(string* deck, int SIZE);
 void playerInitialization(int ID, vector<int>& collectorID);
 void generateOtherPlayers(int ID, int& player1, int& player2, int& player3, int& player4, vector<int>& collectorID);
 void generateStartingCards(string deck[], string& first, string& second, int withoutDeck[], int& counterDeck);
-void defineCombination(string first, string second, string &combination, int &number);
-void defineCombination(string first, string second, string third, string fourth, string fifth, string &combination, int &numberFirst, int &numberSecond);
-void issuingCards(string first, string second, string third, string &combination);
+void defineCombination(string first, string second, string& combination, int& number);
+void defineCombination(string first, string second, string third, string fourth, string fifth, string& combination, int& numberFirst, int& numberSecond);
+void issuingCards(string deck[], string& first, string& second, string& third, int withoutDeck[], int& counterDeck);
 
 //firstPlayer.
 //secondPlayer.
@@ -69,7 +69,7 @@ int main() {
 		fourthPlayer.setID(player3);
 		fifthPlayer.setID(player4);
 		//Выдача двух начальных карт, определение какие карты выдадутся начальными
-		string first, second;
+		string first, second, third, fourth, fifth, sixth, seventh, eighth;
 		int withoutDeck[SIZE];
 		int counterDeck = 0;
 		if (true) {
@@ -93,26 +93,34 @@ int main() {
 		//Начальные ставки
 		bool session = true;
 		int counter = 0;
+		int money1, money2, money3, money4, money5;
+		money1 = firstPlayer.getMoney();
+		money2 = secondPlayer.getMoney();
+		money3 = thirdPlayer.getMoney();
+		money4 = fourthPlayer.getMoney();
+		money5 = fifthPlayer.getMoney();
+		bank.startingBet(money1, money2, money3, money4, money5);
+		firstPlayer.setMoney(money1);
+		secondPlayer.setMoney(money2);
+		thirdPlayer.setMoney(money3);
+		fourthPlayer.setMoney(money4);
+		fifthPlayer.setMoney(money5);
+		string combination;
+		int numberFirst = 0;
+		int numberSecond = 0;
+		bool giveThreeCards = true;
 		while (session) {
-			int money1, money2, money3, money4, money5;
-			money1 = firstPlayer.getMoney();
-			money2 = secondPlayer.getMoney();
-			money3 = thirdPlayer.getMoney();
-			money4 = fourthPlayer.getMoney();
-			money5 = fifthPlayer.getMoney();
-			bank.startingBet(money1, money2, money3, money4, money5);
-			firstPlayer.setMoney(money1);
-			secondPlayer.setMoney(money2);
-			thirdPlayer.setMoney(money3);
-			fourthPlayer.setMoney(money4);
-			fifthPlayer.setMoney(money5);
-			string combination;
-			int number = 0;
 			if (money1 > 0) {
 				cout << "Ваш банк: " << firstPlayer.getMoney() << endl;
 				firstPlayer.getStartingCards(first, second);
 				cout << "Ваши карты: " << first << " и " << second << endl;
-				defineCombination(first, second, combination, number);
+				if (giveThreeCards) {
+					defineCombination(first, second, combination, numberFirst);
+				}
+				else defineCombination(first, second, third, fourth, fifth, combination, numberFirst, numberSecond);
+				if (!giveThreeCards) {
+					cout << "Карты на столе: " << third << " " << fourth << " " << fifth << endl;
+				}
 				cout << "Ваша комбинация: " << combination << endl;
 				cout << "Банк сессии: " << bank.bank << endl;
 				cout << "Выберите один из следующих вариантов" << endl;
@@ -135,12 +143,21 @@ int main() {
 						bank.reiz(money1, sum);
 						answerToTheGame = false;
 						counter++;
+						if (giveThreeCards) {
+							issuingCards(deck, third, fourth, fifth, withoutDeck, counterDeck);
+							giveThreeCards = false;
+						}
 						break;
 					case 2:
 						session = false;
 						answerToTheGame = false;
 						break;
 					case 3:
+						answerToTheGame = false;
+						if (giveThreeCards) {
+							issuingCards(deck, third, fourth, fifth, withoutDeck, counterDeck);
+							giveThreeCards = false;
+						}
 						break;
 					case 4:
 						exit(1);
