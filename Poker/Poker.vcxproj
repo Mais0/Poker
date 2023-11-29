@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CardManager.cpp" />
+    <ClCompile Include="Combinations.cpp" />
     <ClCompile Include="Dependies.cpp" />
     <ClCompile Include="PlayerID.cpp" />
     <ClCompile Include="Players.cpp" />

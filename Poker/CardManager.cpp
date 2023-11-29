@@ -1,40 +1,40 @@
 #include "Dependies.cpp"
-#include <cstdlib>
-#include <ctime>
 
-void algorithm(int count);
+void algorithm(int &count);
+bool checkWithoutDeck(int& index, int withoutDeck[]);
 
-void generateStartingCards(string deck[], string first, string second, int withoutDeck[], int counterDeck) {
-	srand(unsigned(time(0)));
-	//Генерирует карту после чего добавляет её индекс в массив с вышедшеми картами...
-	//...если сгенерировалась уже вышедшая карта итерация проводится заново
+void generateStartingCards(string deck[], string &first, string &second, int withoutDeck[], int &counterDeck) {
 	for (int i = 0; i <= 1; i++) {
-		//Генерация случайного числа от 0 до 51
-		int count = 0;
-		algorithm(count);
-		bool examination = true;
+		int examination = true;
 		while (examination) {
-			int counter = 0;
-			for (int i = 0; i < 52; i++) {
-				if (count == withoutDeck[i]) {
-					counter++;
-					break;
-				}
-			}
-			if (counter == 0) {
-				examination = false;
-				withoutDeck[counterDeck];
+			int index = 99;
+			algorithm(index);
+			examination = checkWithoutDeck(index, withoutDeck);
+			if (i == 0 && examination != 1) {
+				first = deck[index];
+				withoutDeck[counterDeck] = index;
 				counterDeck++;
-				if (i == 0) {
-					first = deck[count];
-				}
-				else second = deck[count];
 			}
-			//Если хоть раз count встречался в массиве то меняем его, если нет - уходим
-			else algorithm(count);
+			if (i == 1 && examination != 1) {
+				second = deck[index];
+				withoutDeck[counterDeck] = index;
+				counterDeck++;
+			}
 		}
 	}
 }
-void algorithm(int count) {
-	count = rand() % 51;
+
+bool checkWithoutDeck(int &index, int withoutDeck[]) {
+	bool examination;
+	for (int i = 0; i < 52; i++) {
+		if (index == withoutDeck[i]) {
+			i = 52;
+			examination = true;
+		}
+		else examination = false;
+	}
+	return examination;
+}
+void algorithm(int &count) {
+	count = rand() % 52;
 }
