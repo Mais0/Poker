@@ -7,7 +7,7 @@ void playerInitialization(int ID, vector<int>& collectorID);
 void generateOtherPlayers(int ID, int& player1, int& player2, int& player3, int& player4, vector<int>& collectorID);
 void generateStartingCards(string deck[], string& first, string& second, int withoutDeck[], int& counterDeck);
 void defineCombination(string first, string second, string& combination, int& number);
-void defineCombination(string first, string second, string third, string fourth, string fifth, string& combination, int& numberFirst, int& numberSecond);
+int defineCombination(string first, string second, string third, string fourth, string fifth, string& combination, int& numberFirst, int& numberSecond);
 void issuingCards(string deck[], string& first, string& second, string& third, int withoutDeck[], int& counterDeck);
 
 //firstPlayer.
@@ -112,12 +112,16 @@ int main() {
 		while (session) {
 			if (money1 > 0) {
 				cout << "Ваш банк: " << firstPlayer.getMoney() << endl;
-				firstPlayer.getStartingCards(first, second);
+				first = deck[35];
+				second = deck[39];
+				/*firstPlayer.getStartingCards(first, second);*/
 				cout << "Ваши карты: " << first << " и " << second << endl;
 				if (giveThreeCards) {
 					defineCombination(first, second, combination, numberFirst);
 				}
-				else defineCombination(first, second, third, fourth, fifth, combination, numberFirst, numberSecond);
+				else {
+					defineCombination(first, second, third, fourth, fifth, combination, numberFirst, numberSecond);
+				}
 				if (!giveThreeCards) {
 					cout << "Карты на столе: " << third << " " << fourth << " " << fifth << endl;
 				}
@@ -155,7 +159,10 @@ int main() {
 					case 3:
 						answerToTheGame = false;
 						if (giveThreeCards) {
-							issuingCards(deck, third, fourth, fifth, withoutDeck, counterDeck);
+							third = deck[43];
+							fourth = deck[47];
+							fifth = deck[51];
+							/*issuingCards(deck, third, fourth, fifth, withoutDeck, counterDeck);*/
 							giveThreeCards = false;
 						}
 						break;
