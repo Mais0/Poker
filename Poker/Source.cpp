@@ -112,9 +112,7 @@ int main() {
 		while (session) {
 			if (money1 > 0) {
 				cout << "Ваш банк: " << firstPlayer.getMoney() << endl;
-				first = deck[35];
-				second = deck[39];
-				/*firstPlayer.getStartingCards(first, second);*/
+				firstPlayer.getStartingCards(first, second);
 				cout << "Ваши карты: " << first << " и " << second << endl;
 				if (giveThreeCards) {
 					defineCombination(first, second, combination, numberFirst);
@@ -159,10 +157,7 @@ int main() {
 					case 3:
 						answerToTheGame = false;
 						if (giveThreeCards) {
-							third = deck[43];
-							fourth = deck[47];
-							fifth = deck[51];
-							/*issuingCards(deck, third, fourth, fifth, withoutDeck, counterDeck);*/
+							issuingCards(deck, third, fourth, fifth, withoutDeck, counterDeck);
 							giveThreeCards = false;
 						}
 						break;
