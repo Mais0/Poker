@@ -1,7 +1,20 @@
 #include "Dependies.cpp"
 
-void algorithm(int &count);
-bool checkWithoutDeck(int& index, int withoutDeck[]);
+bool checkWithoutDeck(int& index, int withoutDeck[]) {
+	bool examination;
+	for (int i = 0; i < 52; i++) {
+		if (index == withoutDeck[i]) {
+			i = 52;
+			examination = true;
+		}
+		else examination = false;
+	}
+	return examination;
+}
+
+void algorithm(int& count) {
+	count = rand() % 52;
+}
 
 void generateStartingCards(string deck[], string &first, string &second, int withoutDeck[], int &counterDeck) {
 	for (int i = 0; i <= 1; i++) {
@@ -22,19 +35,4 @@ void generateStartingCards(string deck[], string &first, string &second, int wit
 			}
 		}
 	}
-}
-
-bool checkWithoutDeck(int &index, int withoutDeck[]) {
-	bool examination;
-	for (int i = 0; i < 52; i++) {
-		if (index == withoutDeck[i]) {
-			i = 52;
-			examination = true;
-		}
-		else examination = false;
-	}
-	return examination;
-}
-void algorithm(int &count) {
-	count = rand() % 52;
 }

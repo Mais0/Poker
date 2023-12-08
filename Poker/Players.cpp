@@ -35,6 +35,9 @@ public:
 		second = this->secondStartingCard;
 	}
 };
+
+
+
 //Player - 2
 class SecondPlayer {
 private:
@@ -70,6 +73,9 @@ public:
 		second = this->secondStartingCard;
 	}
 };
+
+
+
 // Player - 3
 class ThirdPlayer {
 private:
@@ -105,6 +111,9 @@ public:
 		second = this->secondStartingCard;
 	}
 };
+
+
+
 // Player - 4
 class FourthPlayer {
 private:
@@ -139,6 +148,9 @@ public:
 		second = this->secondStartingCard;
 	}
 };
+
+
+
 //Player - 5
 class FifthPlayer {
 private:
@@ -174,6 +186,8 @@ public:
 	}
 };
 
+
+
 //Bank
 class Bank {
 public:
@@ -188,7 +202,7 @@ public:
 		bank = 500;
 	}
 
-	void reiz(int &money, int sum) {
+	void reiz(int &money, int &sum) {
 		money -= sum;
 		bank += sum;
 	}

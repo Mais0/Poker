@@ -8,7 +8,11 @@ void generateOtherPlayers(int ID, int& player1, int& player2, int& player3, int&
 void generateStartingCards(string deck[], string& first, string& second, int withoutDeck[], int& counterDeck);
 void defineCombination(string first, string second, string& combination, int& number);
 int defineCombination(string first, string second, string third, string fourth, string fifth, string& combination, int& numberFirst, int& numberSecond);
+int defineCombination(string first, string second, string third, string fourth, string fifth, string sixth, string& combination, int& numberFirst, int& numberSecond);
+int defineCombination(string first, string second, string third, string fourth, string fifth, string sixth, string seventh, string& combination, int& numberFirst, int& numberSecond);
 void issuingCards(string deck[], string& first, string& second, string& third, int withoutDeck[], int& counterDeck);
+void issuingCard(string deck[], string& card, int withoutDeck[], int& counterDeck);
+
 
 //firstPlayer.
 //secondPlayer.
@@ -25,21 +29,21 @@ int main() {
 	cout << "\t1 - Yes " << endl;
 	cout << "\t2 - No " << endl;
 	cout << endl;
-	int answer;
+	int answer = 0;
 	cout << "Please enter your answer: ";
-	cin >> answer;
+	answer = 1;
+	/*cin >> answer;*/
 	cout << endl;
-	// Список выполненых задач и то что нужно сделать
-	// 1. Создать колоду +
-	// 2. Создать игроков +
-	// 3. Создать выдачу начальных карт +
-	// 4. Создать систему ставок
+	// TO-DO List
+	// 1. Create deck cards +
+	// 2. Create players +
+	// 3. Сreate giving cards +
+	// 4. Create system of bets +
 	// 5. Создать систему которая говорит комбинацию на руках игрока
 	// 6. Прописать логику ботам
 	// 7. Прописать банк
 	//Запустить игру, инициализировать колоду карт, игроков, ставки, начальные карты, комбинации и т.д.
 	if (answer == 1) {
-		bool game = true;
 		const int SIZE = 52;
 		string deck[SIZE];
 		//Заполнение массива колодой карт
@@ -69,9 +73,10 @@ int main() {
 		fourthPlayer.setID(player3);
 		fifthPlayer.setID(player4);
 		//Выдача двух начальных карт, определение какие карты выдадутся начальными
-		string first, second, third, fourth, fifth, sixth, seventh, eighth;
+		string first, second, third, fourth, fifth, sixth, seventh;
 		int withoutDeck[SIZE];
 		int counterDeck = 0;
+		//Установка начальных карт игрокам, блок if для выделения территоррии
 		if (true) {
 			srand(unsigned(time(0)));
 			//Функция принимает массив с картами, и две переменные с начальными картами, после генерирует...
@@ -108,20 +113,35 @@ int main() {
 		string combination;
 		int numberFirst = 0;
 		int numberSecond = 0;
-		bool giveThreeCards = true;
+		bool giveFiveCards = false;
+		bool giveSixthCards = false;
+		bool giveSeventhCards = false;
+		int count = 0;
 		while (session) {
 			if (money1 > 0) {
-				cout << "Ваш банк: " << firstPlayer.getMoney() << endl;
+				cout << "Ваши деньги: " << firstPlayer.getMoney() << endl;
 				firstPlayer.getStartingCards(first, second);
 				cout << "Ваши карты: " << first << " и " << second << endl;
-				if (giveThreeCards) {
-					defineCombination(first, second, combination, numberFirst);
+				if (!giveSeventhCards) {
+					if (!giveSixthCards) {
+						if (!giveFiveCards) {
+							defineCombination(first, second, combination, numberFirst);
+						}
+						else {
+							defineCombination(first, second, third, fourth, fifth, combination, numberFirst, numberSecond);
+						}
+						if (giveFiveCards) {
+							cout << "Карты на столе: " << third << " " << fourth << " " << fifth << endl;
+						}
+					}
+					else {
+						defineCombination(first, second, third, fourth, fifth, sixth, combination, numberFirst, numberSecond);
+						cout << "Карты на столе: " << third << " " << fourth << " " << fifth << " " << sixth << endl;
+					}
 				}
 				else {
-					defineCombination(first, second, third, fourth, fifth, combination, numberFirst, numberSecond);
-				}
-				if (!giveThreeCards) {
-					cout << "Карты на столе: " << third << " " << fourth << " " << fifth << endl;
+					defineCombination(first, second, third, fourth, fifth, sixth, seventh, combination, numberFirst, numberSecond);
+					cout << "Карты на столе: " << third << " " << fourth << " " << fifth << " " << sixth << " " << seventh << endl;
 				}
 				cout << "Ваша комбинация: " << combination << endl;
 				cout << "Банк сессии: " << bank.bank << endl;
@@ -145,9 +165,26 @@ int main() {
 						bank.reiz(money1, sum);
 						answerToTheGame = false;
 						counter++;
-						if (giveThreeCards) {
-							issuingCards(deck, third, fourth, fifth, withoutDeck, counterDeck);
-							giveThreeCards = false;
+						if (count < 3) {
+							if (count < 2) {
+								if (count == 0) {
+									if (!giveFiveCards) {
+										issuingCards(deck, third, fourth, fifth, withoutDeck, counterDeck);
+										giveFiveCards = true;
+										count++;
+									}
+								}
+								else {
+									issuingCard(deck, sixth, withoutDeck, counterDeck);
+									giveSixthCards = true;
+									count++;
+								}
+							}
+							else {
+								issuingCard(deck, seventh, withoutDeck, counterDeck);
+								giveSeventhCards = true;
+								count++;
+							}
 						}
 						break;
 					case 2:
@@ -156,9 +193,26 @@ int main() {
 						break;
 					case 3:
 						answerToTheGame = false;
-						if (giveThreeCards) {
-							issuingCards(deck, third, fourth, fifth, withoutDeck, counterDeck);
-							giveThreeCards = false;
+						if (count < 3) {
+							if (count < 2) {
+								if (count == 0) {
+									if (!giveFiveCards) {
+										issuingCards(deck, third, fourth, fifth, withoutDeck, counterDeck);
+										giveFiveCards = true;
+										count++;
+									}
+								}
+								else {
+									issuingCard(deck, sixth, withoutDeck, counterDeck);
+									giveSixthCards = true;
+									count++;
+								}
+							}
+							else {
+								issuingCard(deck, seventh, withoutDeck, counterDeck);
+								giveSeventhCards = true;
+								count++;
+							}
 						}
 						break;
 					case 4:
