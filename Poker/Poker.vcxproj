@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BotsLogic.cpp" />
     <ClCompile Include="CardManager.cpp" />
     <ClCompile Include="Combinations.cpp" />
     <ClCompile Include="Dependies.cpp" />

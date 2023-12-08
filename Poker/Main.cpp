@@ -12,13 +12,7 @@ int defineCombination(string first, string second, string third, string fourth, 
 int defineCombination(string first, string second, string third, string fourth, string fifth, string sixth, string seventh, string& combination, int& numberFirst, int& numberSecond);
 void issuingCards(string deck[], string& first, string& second, string& third, int withoutDeck[], int& counterDeck);
 void issuingCard(string deck[], string& card, int withoutDeck[], int& counterDeck);
-
-
-//firstPlayer.
-//secondPlayer.
-//thirdPlayer.
-//fourthPlayer.
-//fifthPlayer.
+void botsLogic(string combination, int& money1, int& money2, int& money3, int& money4, int& money5, FirstPlayer& firstPlayer, SecondPlayer& secondPlayer, ThirdPlayer& thirdPlayer, FourthPlayer& fourthPlayer, FifthPlayer& fifthPlayer, Bank& bank);
 
 int main() {
 	//Начало программы
@@ -166,6 +160,7 @@ int main() {
 						cin >> sum;
 						cout << endl;
 						bank.reiz(money1, sum);
+						firstPlayer.setMoney(money1);
 						answerToTheGame = false;
 						counter++;
 						if (count < 3) {
@@ -189,6 +184,7 @@ int main() {
 								count++;
 							}
 						}
+						botsLogic(combination, money1, money2, money3, money4, money5, firstPlayer, secondPlayer, thirdPlayer, fourthPlayer, fifthPlayer, bank);
 						break;
 					case 2:
 						session = false;
@@ -217,6 +213,7 @@ int main() {
 								count++;
 							}
 						}
+						botsLogic(combination, money1, money2, money3, money4, money5, firstPlayer, secondPlayer, thirdPlayer, fourthPlayer, fifthPlayer, bank);
 						break;
 					case 4:
 						exit(1);

@@ -1,5 +1,11 @@
 #include "Dependies.cpp"
 
+/*firstPlayer.
+secondPlayer.
+thirdPlayer.
+fourthPlayer.
+fifthPlayer.*/
+
 //Player - 1
 class FirstPlayer  {
 private:
@@ -46,9 +52,14 @@ private:
 	string firstStartingCard;
 	string secondStartingCard;
 	string combination;
+	string name = "Richard";
 public:
 	void setID(int ID) {
 		this->ID = ID;
+	}
+
+	string getName() {
+		return name;
 	}
 
 	int getMoney() {
@@ -84,9 +95,15 @@ private:
 	string firstStartingCard;
 	string secondStartingCard;
 	string combination;
+	string name = "John";
+
 public:
 	void setID(int ID) {
 		this->ID = ID;
+	}
+
+	string getName() {
+		return name;
 	}
 
 	int getMoney() {
@@ -122,10 +139,17 @@ private:
 	string firstStartingCard;
 	string secondStartingCard;
 	string combination;
+	string name = "Mickle";
+
 public:
 	void setID(int ID) {
 		this->ID = ID;
 	}
+
+	string getName() {
+		return name;
+	}
+
 	int getMoney() {
 		return money;
 	}
@@ -159,12 +183,19 @@ private:
 	string firstStartingCard;
 	string secondStartingCard;
 	string combination;
+	string name = "Adam";
+
 public:
 	void setID(int ID) {
 		this->ID = ID;
 	}
+
 	int getMoney() {
 		return money;
+	}
+
+	string getName() {
+		return name;
 	}
 
 	void setMoney(int money) {
@@ -204,6 +235,10 @@ public:
 
 	void reiz(int &money, int &sum) {
 		money -= sum;
-		bank += sum;
+		this->bank += sum;
+	}
+
+	void getBet(int bet) {
+		bank += bet;
 	}
 };
