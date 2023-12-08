@@ -37,31 +37,31 @@ int main() {
 	// TO-DO List
 	// 1. Create deck cards +
 	// 2. Create players +
-	// 3. Сreate giving cards +
-	// 4. Create system of bets +
-	// 5. Создать систему которая говорит комбинацию на руках игрока
-	// 6. Прописать логику ботам
-	// 7. Прописать банк
-	//Запустить игру, инициализировать колоду карт, игроков, ставки, начальные карты, комбинации и т.д.
+	// 3. Сreate issuing +
+	// 4. Create system of bets +-
+	// 5. Create a definition system +
+	// 6. Create BOT logic
+	// 7. Create bank
+	//Start the game, initialize the deck of cards, players, bets, starting cards, combinations, etc
 	if (answer == 1) {
 		const int SIZE = 52;
 		string deck[SIZE];
-		//Заполнение массива колодой карт
+		//Filling an array with a deck of cards
 		setDeck(deck, SIZE);
-		//Массив который хранит всех инициализированных пользователей
+		//An array that stores all initialized users
 		vector<int> collectorID;
-		//Идентификатор пользователя
+		//User ID
 		int ID = 1;
-		//Проверка на уникальность идентификатора пользователя
+		//Checking the uniqueness of the user ID
 		playerInitialization(ID, collectorID);
-		//Генерация другие пользователей (ботов)
+		//Generation of other users (bots)
 		int player1 = 0;
 		int player2 = 0;
 		int player3 = 0;
 		int player4 = 0;
-		//Инициализация идентификаторов другим пользователям и проверка на их уникальность
+		//Initializing identifiers for other users and checking for their uniqueness
 		generateOtherPlayers(ID, player1, player2, player3, player4, collectorID);
-		//Игроки, передача их идентификаторов к ним в профиль
+		//Players, transferring their identifiers to their profile
 		FirstPlayer firstPlayer;
 		SecondPlayer secondPlayer;
 		ThirdPlayer thirdPlayer;
@@ -72,17 +72,16 @@ int main() {
 		thirdPlayer.setID(player2);
 		fourthPlayer.setID(player3);
 		fifthPlayer.setID(player4);
-		//Выдача двух начальных карт, определение какие карты выдадутся начальными
+		//Issuing two initial cards, determining which cards will be issued as initial cards
 		string first, second, third, fourth, fifth, sixth, seventh;
 		int withoutDeck[SIZE];
 		int counterDeck = 0;
-		//Установка начальных карт игрокам, блок if для выделения территоррии
+		//Installing initial maps for players, if block to allocate territory
 		if (true) {
 			srand(unsigned(time(0)));
-			//Функция принимает массив с картами, и две переменные с начальными картами, после генерирует...
-			//...случайный индекс массива и выдаёт карту
+			//The function takes an array with cards, and two variables with initial cards, then generates a random index of the array and returns the card
 			generateStartingCards(deck, first, second, withoutDeck, counterDeck);
-			//Устанавливает игроку выпавшие ему карты
+			//Sets the player's dealt cards
 			firstPlayer.setStartingCards(first, second);
 			generateStartingCards(deck, first, second, withoutDeck, counterDeck);
 			secondPlayer.setStartingCards(first, second);
@@ -93,9 +92,10 @@ int main() {
 			generateStartingCards(deck, first, second, withoutDeck, counterDeck);
 			fifthPlayer.setStartingCards(first, second);
 		}
-		//Подключение банка
+		//Bank connection
 		Bank bank;
-		//Начальные ставки
+		//Initial rates
+		//I'm too lazy to comment further
 		bool session = true;
 		int counter = 0;
 		int money1, money2, money3, money4, money5;
