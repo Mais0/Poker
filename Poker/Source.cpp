@@ -110,6 +110,7 @@ int main() {
 		thirdPlayer.setMoney(money3);
 		fourthPlayer.setMoney(money4);
 		fifthPlayer.setMoney(money5);
+	game:
 		string combination;
 		int numberFirst = 0;
 		int numberSecond = 0;
@@ -120,7 +121,9 @@ int main() {
 		while (session) {
 			if (money1 > 0) {
 				cout << "Ваши деньги: " << firstPlayer.getMoney() << endl;
-				firstPlayer.getStartingCards(first, second);
+				if (first.empty()) {
+					firstPlayer.getStartingCards(first, second);
+				}
 				cout << "Ваши карты: " << first << " и " << second << endl;
 				if (!giveSeventhCards) {
 					if (!giveSixthCards) {
@@ -225,6 +228,9 @@ int main() {
 				}
 			}
 			else exit(2);
+		}
+		if (money1 > 0) {
+			goto game;
 		}
 	}
 }
