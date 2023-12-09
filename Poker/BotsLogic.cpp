@@ -188,7 +188,7 @@ void botsLogic(string combination, int& money1, int& money2, int& money3, int& m
 		count++;
 	}
 	int result = comparisonOfRates(comparisonRate, comparisonArray);
-	for (int i = 0; i < 5;i++) {
+	for (int i = 0; i < 4;i++) {
 		if (i == 0) {
 			if (betS == result) {
 				bank.getBet(result);
@@ -225,11 +225,8 @@ void botsLogic(string combination, int& money1, int& money2, int& money3, int& m
 				money5 -= result - betFi;
 			}
 		}
-		if (i == 4) {
-			bank.getBet(result - betFi);
-			money5 -= result - betFi;
-		}
 	}
+	money1 -= result;
 	firstPlayer.setMoney(money1);
 	secondPlayer.setMoney(money2);
 	thirdPlayer.setMoney(money3);
