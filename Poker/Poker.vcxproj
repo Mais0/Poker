@@ -134,7 +134,7 @@
     <ClCompile Include="PlayerID.cpp" />
     <ClCompile Include="Players.cpp" />
     <ClCompile Include="SetDeck.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
