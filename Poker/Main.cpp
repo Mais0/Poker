@@ -12,7 +12,8 @@ int defineCombination(string first, string second, string third, string fourth, 
 int defineCombination(string first, string second, string third, string fourth, string fifth, string sixth, string seventh, string& combination, int& numberFirst, int& numberSecond);
 void issuingCards(string deck[], string& first, string& second, string& third, int withoutDeck[], int& counterDeck);
 void issuingCard(string deck[], string& card, int withoutDeck[], int& counterDeck);
-void botsLogic(string combination, int& money1, int& money2, int& money3, int& money4, int& money5, FirstPlayer& firstPlayer, SecondPlayer& secondPlayer, ThirdPlayer& thirdPlayer, FourthPlayer& fourthPlayer, FifthPlayer& fifthPlayer, Bank& bank);
+void botsLogic(string combination, bool supportTheBid, int playerRate, int& money1, int& money2, int& money3, int& money4, int& money5, FirstPlayer& firstPlayer, SecondPlayer& secondPlayer, ThirdPlayer& thirdPlayer, FourthPlayer& fourthPlayer, FifthPlayer& fifthPlayer, Bank& bank);
+void botsLogic(string combination, bool supportTheBid, int& money1, int& money2, int& money3, int& money4, int& money5, FirstPlayer& firstPlayer, SecondPlayer& secondPlayer, ThirdPlayer& thirdPlayer, FourthPlayer& fourthPlayer, FifthPlayer& fifthPlayer, Bank& bank);
 
 int main() {
 	//Начало программы
@@ -66,6 +67,7 @@ int main() {
 		thirdPlayer.setID(player2);
 		fourthPlayer.setID(player3);
 		fifthPlayer.setID(player4);
+	game:
 		//Issuing two initial cards, determining which cards will be issued as initial cards
 		string first, second, third, fourth, fifth, sixth, seventh;
 		int withoutDeck[SIZE];
@@ -104,7 +106,6 @@ int main() {
 		thirdPlayer.setMoney(money3);
 		fourthPlayer.setMoney(money4);
 		fifthPlayer.setMoney(money5);
-	game:
 		string combination;
 		int numberFirst = 0;
 		int numberSecond = 0;
@@ -113,6 +114,7 @@ int main() {
 		bool giveSeventhCards = false;
 		int count = 0;
 		while (session) {
+			bool supportTheBid = true;
 			if (money1 > 0) {
 				cout << "Ваши деньги: " << firstPlayer.getMoney() << endl;
 				if (first.empty()) {
@@ -159,8 +161,6 @@ int main() {
 						cout << "Введите сумму ставки: ";
 						cin >> sum;
 						cout << endl;
-						bank.reiz(money1, sum);
-						firstPlayer.setMoney(money1);
 						answerToTheGame = false;
 						counter++;
 						if (count < 3) {
@@ -184,7 +184,10 @@ int main() {
 								count++;
 							}
 						}
-						botsLogic(combination, money1, money2, money3, money4, money5, firstPlayer, secondPlayer, thirdPlayer, fourthPlayer, fifthPlayer, bank);
+						botsLogic(combination, supportTheBid, sum, money1, money2, money3, money4, money5, firstPlayer, secondPlayer, thirdPlayer, fourthPlayer, fifthPlayer, bank);
+						if (!supportTheBid) {
+							goto game;
+						}
 						break;
 					case 2:
 						session = false;
@@ -213,7 +216,10 @@ int main() {
 								count++;
 							}
 						}
-						botsLogic(combination, money1, money2, money3, money4, money5, firstPlayer, secondPlayer, thirdPlayer, fourthPlayer, fifthPlayer, bank);
+						botsLogic(combination, supportTheBid, money1, money2, money3, money4, money5, firstPlayer, secondPlayer, thirdPlayer, fourthPlayer, fifthPlayer, bank);
+						if (!supportTheBid) {
+							goto game;
+						}
 						break;
 					case 4:
 						exit(1);

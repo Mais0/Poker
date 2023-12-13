@@ -233,11 +233,6 @@ public:
 		bank = 500;
 	}
 
-	void reiz(int &money, int &sum) {
-		money -= sum;
-		this->bank += sum;
-	}
-
 	void getBet(int bet) {
 		bank += bet;
 	}

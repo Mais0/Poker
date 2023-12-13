@@ -1,136 +1,100 @@
 #include "Players.cpp"
 
-void logicSecondPlayer(string combination, int& money1, SecondPlayer& secondPlayer, Bank& bank, int &comparisonRate) {
+void logicSecondPlayer(string combination, int& money1, SecondPlayer& secondPlayer, int &comparisonRate) {
 	bool betOrNo = rand() % 2;
 	if (betOrNo) {
 		if (combination == "Flesh royal") {
 			int maxMoney = secondPlayer.getMoney();
 			int bet = rand() % maxMoney;
-			bank.getBet(bet);
-			money1 -= bet;
-			secondPlayer.setMoney(money1);
 			cout << secondPlayer.getName() << " bet is " << bet << endl;
 			comparisonRate = bet;
 		}
 		if (money1 >= 250) {
 			int bet = rand() % 249 + 1;
-			bank.getBet(bet);
-			money1 -= bet;
-			secondPlayer.setMoney(money1);
 			cout << secondPlayer.getName() << " bet is " << bet << endl;
 			comparisonRate = bet;
 		}
 		else {
 			int maxMoney = secondPlayer.getMoney();
 			int bet = rand() % maxMoney;
-			bank.getBet(bet);
-			money1 -= bet;
-			secondPlayer.setMoney(money1);
 			cout << secondPlayer.getName() << " bet is " << bet << endl;
 			comparisonRate = bet;
 		}
 	}
 }
 
-void logicThirdPlayer(string combination, int& money2, ThirdPlayer& thirdPlayer, Bank& bank, int& comparisonRate) {
+void logicThirdPlayer(string combination, int& money2, ThirdPlayer& thirdPlayer, int& comparisonRate) {
 	bool betOrNo = rand() % 2;
 	if (betOrNo) {
 		if (combination == "Flesh royal") {
 			int maxMoney = thirdPlayer.getMoney();
 			int bet = rand() % maxMoney;
-			bank.getBet(bet);
-			money2 -= bet;
-			thirdPlayer.setMoney(money2);
 			cout << thirdPlayer.getName() << " bet is " << bet << endl;
 			comparisonRate = bet;
 		}
 		if (money2 >= 250) {
 			int bet = rand() % 249 + 1;
-			bank.getBet(bet);
-			money2 -= bet;
-			thirdPlayer.setMoney(money2);
 			cout << thirdPlayer.getName() << " bet is " << bet << endl;
 			comparisonRate = bet;
 		}
 		else {
 			int maxMoney = thirdPlayer.getMoney();
 			int bet = rand() % maxMoney;
-			bank.getBet(bet);
-			money2 -= bet;
-			thirdPlayer.setMoney(money2);
 			cout << thirdPlayer.getName() << " bet is " << bet << endl;
 			comparisonRate = bet;
 		}
 	}
 }
 
-void logicFourthPlayer(string combination, int& money3, FourthPlayer& fourthPlayer, Bank& bank, int& comparisonRate) {
+void logicFourthPlayer(string combination, int& money3, FourthPlayer& fourthPlayer, int& comparisonRate) {
 	bool betOrNo = rand() % 2;
 	if (betOrNo) {
 		if (combination == "Flesh royal") {
 			int maxMoney = fourthPlayer.getMoney();
 			int bet = rand() % maxMoney;
-			bank.getBet(bet);
-			money3 -= bet;
-			fourthPlayer.setMoney(money3);
 			cout << fourthPlayer.getName() << " bet is " << bet << endl;
 			comparisonRate = bet;
 		}
 		if (money3 >= 250) {
 			int bet = rand() % 249 + 1;
-			bank.getBet(bet);
-			money3 -= bet;
-			fourthPlayer.setMoney(money3);
 			cout << fourthPlayer.getName() << " bet is " << bet << endl;
 			comparisonRate = bet;
 		}
 		else {
 			int maxMoney = fourthPlayer.getMoney();
 			int bet = rand() % maxMoney;
-			bank.getBet(bet);
-			money3 -= bet;
-			fourthPlayer.setMoney(money3);
 			cout << fourthPlayer.getName() << " bet is " << bet << endl;
 			comparisonRate = bet;
 		}
 	}
 }
 
-void logicFifthPlayer(string combination, int& money4, FifthPlayer& fifthPlayer, Bank& bank, int& comparisonRate) {
+void logicFifthPlayer(string combination, int& money4, FifthPlayer& fifthPlayer, int& comparisonRate) {
 	bool betOrNo = rand() % 2;
 	if (betOrNo) {
 		if (combination == "Flesh royal") {
 			int maxMoney = fifthPlayer.getMoney();
 			int bet = rand() % maxMoney;
-			bank.getBet(bet);
-			money4 -= bet;
-			fifthPlayer.setMoney(money4);
 			cout << fifthPlayer.getName() << " bet is " << bet << endl;
 			comparisonRate = bet;
 		}
 		if (money4 >= 250) {
 			int bet = rand() % 249 + 1;
-			bank.getBet(bet);
-			money4 -= bet;
-			fifthPlayer.setMoney(money4);
 			cout << fifthPlayer.getName() << " bet is " << bet << endl;
 			comparisonRate = bet;
 		}
 		else {
 			int maxMoney = fifthPlayer.getMoney();
 			int bet = rand() % maxMoney;
-			bank.getBet(bet);
-			money4 -= bet;
-			fifthPlayer.setMoney(money4);
 			cout << fifthPlayer.getName() << " bet is " << bet << endl;
 			comparisonRate = bet;
 		}
 	}
 }
 
-int comparisonOfRates(int comparisonRate, int comparisonArray[]) {
+int comparisonOfRates(int comparisonRate, vector<int> comparisonArray) {
 	comparisonRate = comparisonArray[0];
-	for (int i = 1; i < 4; i++) {
+	for (int i = 1; i < comparisonArray.size(); i++) {
 		if (comparisonArray[i] > comparisonRate) {
 			comparisonRate = comparisonArray[i];
 		}
@@ -138,99 +102,141 @@ int comparisonOfRates(int comparisonRate, int comparisonArray[]) {
 	return comparisonRate;
 }
 
-void botsLogic(string combination, int& money1, int& money2, int& money3, int& money4, int& money5, FirstPlayer& firstPlayer, SecondPlayer& secondPlayer, ThirdPlayer& thirdPlayer, FourthPlayer& fourthPlayer, FifthPlayer& fifthPlayer, Bank& bank) {
-	int quantityPlayersSetBet = rand() % 4 + 1;
-	int playersWhoMadeABet[4];
-	int count = 0;
+void everyonePutsInTheHighestBidWithoutFirstPlayer(int rate, Bank &bank) {
+	for (int i = 0; i < 4; i++) {
+		bank.getBet(rate);
+	}
+}
+
+void everyonePutsInTheHighestBid(int rate, Bank &bank) {
+	for (int i = 0; i < 5; i++) {
+		bank.getBet(rate);
+	}
+}
+
+void reduceMoney(int& money1, int& money2, int& money3, int& money4, int& money5, int rate) {
+	money1 -= rate;
+	money2 -= rate;
+	money3 -= rate;
+	money4 -= rate;
+	money5 -= rate;
+}
+
+void reduceMoney(int& money1, int& money2, int& money3, int& money4, int rate) {
+	money1 -= rate;
+	money2 -= rate;
+	money3 -= rate;
+	money4 -= rate;
+}
+
+void botsLogic(string combination, bool supportTheBid, int playerRate, int& money1, int& money2, int& money3, int& money4, int& money5, FirstPlayer& firstPlayer, SecondPlayer& secondPlayer, ThirdPlayer& thirdPlayer, FourthPlayer& fourthPlayer, FifthPlayer& fifthPlayer, Bank& bank) {
 	int comparisonRate = 0;
-	int comparisonArray[4];
-	bool second = false, third = false, fourth = false, fifth = false;
-	int betS = 0, betT = 0, betF = 0, betFi = 0;
-	for (int i = 0; i < quantityPlayersSetBet; i++) {
-	getRandom:
-		int random = rand() % 4 + 1;
-		for (int i = count; i < 4; i++) {
-			if (playersWhoMadeABet[i] == random) {
-				goto getRandom;
-			}
-		}
-		playersWhoMadeABet[count] = random;
-		switch (random)
-		{
-		case 1:
-			logicSecondPlayer(combination, money1, secondPlayer, bank, comparisonRate);
-			comparisonArray[i] = comparisonRate;
-			second = true;
-			betS = comparisonRate;
-			break;
-		case 2:
-			logicThirdPlayer(combination, money2, thirdPlayer, bank, comparisonRate);
-			comparisonArray[i] = comparisonRate;
-			third = true;
-			betT = comparisonRate;
-			break;
-		case 3:
-			logicFourthPlayer(combination, money3, fourthPlayer, bank, comparisonRate);
-			comparisonArray[i] = comparisonRate;
-			fourth = true;
-			betF = comparisonRate;
-			break;
-		case 4:
-			logicFifthPlayer(combination, money4, fifthPlayer, bank, comparisonRate);
-			comparisonArray[i] = comparisonRate;
-			fifth = true;
-			betFi = comparisonRate;
-			break;
-		default:
-			botsLogic(combination, money1, money2, money3, money4, money5, firstPlayer, secondPlayer, thirdPlayer, fourthPlayer, fifthPlayer, bank);
-			break;
-		}
-		count++;
-	}
-	int result = comparisonOfRates(comparisonRate, comparisonArray);
-	for (int i = 0; i < 4;i++) {
-		if (i == 0) {
-			if (betS == result) {
-				bank.getBet(result);
-			}
-			else {
-				bank.getBet(result - betS);
-				money2 -= result - betS;
-			}
-		}
-		if (i == 1) {
-			if (betT == result) {
-				bank.getBet(result);
-			}
-			else {
-				bank.getBet(result - betT);
-				money3 -= result - betT;
-			}
-		}
-		if (i == 2) {
-			if (betF == result) {
-				bank.getBet(result);
-			}
-			else {
-				bank.getBet(result - betF);
-				money4 -= result - betF;
-			}
-		}
-		if (i == 3) {
-			if (betFi == result) {
-				bank.getBet(result);
-			}
-			else {
-				bank.getBet(result - betFi);
-				money5 -= result - betFi;
-			}
+	vector<int> comparisonArray;
+	comparisonArray.push_back(playerRate);
+	logicSecondPlayer(combination, money2, secondPlayer, comparisonRate);
+	comparisonArray.push_back(comparisonRate);
+	comparisonRate = 0;
+	logicThirdPlayer(combination, money3, thirdPlayer, comparisonRate);
+	comparisonArray.push_back(comparisonRate);
+	comparisonRate = 0;
+	logicFourthPlayer(combination, money4, fourthPlayer, comparisonRate);
+	comparisonArray.push_back(comparisonRate);
+	comparisonRate = 0;
+	logicFifthPlayer(combination, money5, fifthPlayer, comparisonRate);
+	comparisonArray.push_back(comparisonRate);
+	int count = 0;
+	for (int i = 0; i < comparisonArray.size(); i++) {
+		if (comparisonArray[i] > 0) {
+			count++;
 		}
 	}
-	money1 -= result;
-	bank.getBet(result);
-	firstPlayer.setMoney(money1);
-	secondPlayer.setMoney(money2);
-	thirdPlayer.setMoney(money3);
-	fourthPlayer.setMoney(money4);
-	fifthPlayer.setMoney(money5);
+	if (count > 0) {
+		int result = comparisonOfRates(comparisonRate, comparisonArray);
+	again:
+		int answer = 0;
+		if (comparisonArray[0] == playerRate && playerRate == result) {
+			answer = 1;
+		}
+		else {
+			cout << "Ставки подняты до - " << result << " желаете поддержать ставку или сбросить карты?" << endl;
+			cout << "1. Поддержать" << endl;
+			cout << "2. Сбросить карты" << endl;
+			cout << "Введите ответ - ";
+			cin >> answer;
+			cout << endl;
+		}
+		if (answer == 1) {
+			everyonePutsInTheHighestBid(result, bank);
+			reduceMoney(money1,money2,money3,money4,money5, result);
+			firstPlayer.setMoney(money1);
+			secondPlayer.setMoney(money2);
+			thirdPlayer.setMoney(money3);
+			fourthPlayer.setMoney(money4);
+			fifthPlayer.setMoney(money5);
+			supportTheBid = true;
+		}
+		else if (answer == 2) {
+			everyonePutsInTheHighestBidWithoutFirstPlayer(result, bank);
+			reduceMoney(money2, money3, money4, money5, result);
+			secondPlayer.setMoney(money2);
+			thirdPlayer.setMoney(money3);
+			fourthPlayer.setMoney(money4);
+			fifthPlayer.setMoney(money5);
+			supportTheBid = false;
+		}
+		else goto again;
+	}
+}
+
+void botsLogic(string combination, bool supportTheBid, int& money1, int& money2, int& money3, int& money4, int& money5, FirstPlayer& firstPlayer, SecondPlayer& secondPlayer, ThirdPlayer& thirdPlayer, FourthPlayer& fourthPlayer, FifthPlayer& fifthPlayer, Bank& bank) {
+	int comparisonRate = 0;
+	vector<int> comparisonArray;
+	logicSecondPlayer(combination, money2, secondPlayer, comparisonRate);
+	comparisonArray.push_back(comparisonRate);
+	comparisonRate = 0;
+	logicThirdPlayer(combination, money3, thirdPlayer, comparisonRate);
+	comparisonArray.push_back(comparisonRate);
+	comparisonRate = 0;
+	logicFourthPlayer(combination, money4, fourthPlayer, comparisonRate);
+	comparisonArray.push_back(comparisonRate);
+	comparisonRate = 0;
+	logicFifthPlayer(combination, money5, fifthPlayer, comparisonRate);
+	comparisonArray.push_back(comparisonRate);
+	int count = 0;
+	for (int i = 0; i < comparisonArray.size(); i++) {
+		if (comparisonArray[i] > 0) {
+			count++;
+		}
+	}
+	if (count > 0) {
+		int result = comparisonOfRates(comparisonRate, comparisonArray);
+	again:
+		cout << "Ставки подняты до - " << result << " желаете поддержать ставку или сбросить карты?" << endl;
+		cout << "1. Поддержать" << endl;
+		cout << "2. Сбросить карты" << endl;
+		int answer = 0;
+		cout << "Введите ответ - ";
+		cin >> answer;
+		cout << endl;
+		if (answer == 1) {
+			everyonePutsInTheHighestBid(result, bank);
+			reduceMoney(money1, money2, money3, money4, money5, result);
+			firstPlayer.setMoney(money1);
+			secondPlayer.setMoney(money2);
+			thirdPlayer.setMoney(money3);
+			fourthPlayer.setMoney(money4);
+			fifthPlayer.setMoney(money5);
+			supportTheBid = true;
+		}
+		if (answer == 2) {
+			everyonePutsInTheHighestBidWithoutFirstPlayer(result, bank);
+			reduceMoney(money2, money3, money4, money5, result);
+			secondPlayer.setMoney(money2);
+			thirdPlayer.setMoney(money3);
+			fourthPlayer.setMoney(money4);
+			fifthPlayer.setMoney(money5);
+			supportTheBid = false;
+		}
+		else goto again;
+	}
 }
